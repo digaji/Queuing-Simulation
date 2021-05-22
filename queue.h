@@ -21,7 +21,6 @@ public:
 	queue* q;
 
 	Queue();
-	void create_queue();
 	queue* insert(int);
 	queue* delete_element();
 	queue* display();

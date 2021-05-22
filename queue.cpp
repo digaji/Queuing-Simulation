@@ -1,20 +1,20 @@
 // Queue
 // a program to implement a linked queue.
 #include <iostream>
-#include <queue.h>
+#include "queue.h"
 using namespace std;
 
-struct node
-{
-	int data;
-	node* next;
-};
+// struct node
+// {
+// 	int data;
+// 	node* next;
+// };
 
-struct queue
-{
-	node* front;
-	node* rear;
-};
+// struct queue
+// {
+// 	node* front;
+// 	node* rear;
+// };
 
 Queue::Queue()
 {
@@ -49,13 +49,13 @@ queue* Queue::display()
 		cout << "\n QUEUE IS EMPTY";
 	else
 	{
-		cout << "\n";
+		// cout << "\n";
 		while(ptr!=q -> rear)
 		{
-			cout << ptr -> data << "\t";
+			cout << ptr -> data << "\n";
 			ptr = ptr -> next;
 		}
-		cout << ptr -> data << "\t";
+		cout << ptr -> data << "\n";
 	}
 	return q;
 }
