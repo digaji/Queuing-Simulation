@@ -12,14 +12,10 @@ int main() {
     Queue bank;
 
     // 8
-    bank.insert(5);
-    bank.insert(4);
-    bank.insert(3);
-    bank.insert(5);
-    bank.insert(4);
-    bank.insert(6);
-    bank.insert(5);
-    bank.insert(4);
+    for (int i = 0; i < 8; i++)
+    {
+        bank.insert(4 + (rand() % 2));//change this random thing
+    }
 
     const int ARRIVAL_TIME = 2;
     int c_time = 0;
@@ -41,7 +37,7 @@ int main() {
         cout << "time\tno. of cust\n" << c_time+1 << "\t\t" << processed_customer << endl;
 
         if (c_time % ARRIVAL_TIME == 0) {
-            bank.insert(4 + (rand() % 2));
+            bank.insert(4 + (rand() % 2)); //change this random thing
             customers++;
         }
         
