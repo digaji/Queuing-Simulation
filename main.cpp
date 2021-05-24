@@ -58,7 +58,7 @@ int main() {
             if (cashierArray[i].active == true) {
                 cashierArray[i].time_At--;  //Decrement time spent at teller
             }
-            if (cashierArray[i].time_At == 0) {
+            if (cashierArray[i].active == true && cashierArray[i].time_At == 0) {
                 cashierArray[i].active = false; //Set teller to open if time limit is reached
                 processed_customer++;
             }
