@@ -25,5 +25,9 @@ public:
 	queue* delete_element();
 	queue* display();
 	int peek();
+	int get_size();
 	void move_next();
+
+private:
+	int size;
 };

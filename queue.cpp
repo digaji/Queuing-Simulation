@@ -21,6 +21,7 @@ Queue::Queue()
 	q = new queue;
 	q -> rear = nullptr;
 	q -> front = nullptr;
+	size = 0;
 }
 
 queue* Queue::insert(int val)
@@ -33,10 +34,12 @@ queue* Queue::insert(int val)
     if (q -> front == nullptr) {
         q -> front = q -> rear = ptr;
         q -> front -> next = q -> rear -> next = nullptr;
+		size++;
     } else {
         q -> rear -> next = ptr;
         q -> rear = ptr;
         q -> rear -> next = nullptr;
+		size++;
     }
 	return q;
 }
@@ -71,6 +74,7 @@ queue* Queue::delete_element()
     } else {
         q -> front = q -> front -> next;
         delete ptr;
+		size--;
     }
 	return q;
 }
@@ -84,4 +88,9 @@ int Queue::peek()
 	}
 	else
 		return q->front->data;
+}
+
+int Queue::get_size()
+{
+	return size;
 }
