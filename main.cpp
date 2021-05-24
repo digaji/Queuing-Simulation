@@ -21,7 +21,7 @@ int main() {
     bank.insert(5);
     bank.insert(4);
 
-    const int ARRIVAL_TIME = 3;
+    const int ARRIVAL_TIME = 2;
     int c_time = 0;
     const int SIM_TIME = 30;
     int customers = 8;
