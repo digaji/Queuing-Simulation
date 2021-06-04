@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include "queue.cpp"
 
 using namespace std;
@@ -10,12 +11,7 @@ struct Cashier {
 
 int main() {
     Queue bank;
-
-    // 8
-    for (int i = 0; i < 8; i++)
-    {
-        bank.insert(4 + (rand() % 2));//change this random thing
-    }
+    srand (time(0));    // Randomize rand() output
 
     const int ARRIVAL_TIME = 2;
     int c_time = 0;
@@ -23,10 +19,23 @@ int main() {
     int customers = 8;
     const int NUM_CASHIER = 3;
     int processed_customer = 0;
+    int mean, std;
+
+    cout << "Mean service time: ";
+    cin >> mean;
+
+    cout << "Standard deviation: ";
+    cin >> std;
+
+    // 8
+    for (int i = 0; i < 8; i++)
+    {
+        bank.insert(rand() % mean + std);  // Currently the random range becomes from std to mean
+    }
 
     //Dynamically allocate an array for the teller structure
-		Cashier* cashierArray = new Cashier[NUM_CASHIER];
-		
+    Cashier* cashierArray = new Cashier[NUM_CASHIER];
+
     //Set all tellers to empty
     for (int i = 0; i < NUM_CASHIER; i++) {
         cashierArray[i].active = false;
@@ -37,19 +46,18 @@ int main() {
         cout << "time\tno. of cust\n" << c_time+1 << "\t\t" << processed_customer << endl;
 
         if (c_time % ARRIVAL_TIME == 0) {
-            bank.insert(4 + (rand() % 2)); //change this random thing
+            bank.insert(rand() % mean + std);
             customers++;
         }
-        
+
         for (int i = 0; i < NUM_CASHIER; i++) {
             if (cashierArray[i].active == false && bank.get_size() != 0) { //Dequeue if a teller is open
                 cashierArray[i].active = true;
-                cashierArray[i].time_At = bank.peek();	
-                bank.delete_element();					
+                cashierArray[i].time_At = bank.peek();
+                bank.delete_element();
             }
         }
-			
-			
+
         for (int i = 0; i < NUM_CASHIER; i++) {
             if (cashierArray[i].active == true) {
                 cashierArray[i].time_At--;  //Decrement time spent at teller
@@ -62,5 +70,5 @@ int main() {
         c_time++;
     }
 
-    cout << "number of customers: " << customers;
+    cout << "Total number of customers: " << customers << endl;
 }
