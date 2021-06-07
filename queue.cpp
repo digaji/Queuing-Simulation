@@ -4,18 +4,6 @@
 #include "queue.h"
 using namespace std;
 
-// struct node
-// {
-// 	int data;
-// 	node* next;
-// };
-
-// struct queue
-// {
-// 	node* front;
-// 	node* rear;
-// };
-
 Queue::Queue()
 {
 	q = new queue;
@@ -30,7 +18,6 @@ queue* Queue::insert(int val)
 	ptr = new node;
 	ptr -> data = val;
 
-	// your code
     if (q -> front == nullptr) {
         q -> front = q -> rear = ptr;
         q -> front -> next = q -> rear -> next = nullptr;
@@ -48,12 +35,11 @@ queue* Queue::display()
 {
 	node* ptr;
 	ptr = q -> front;
-	if(ptr == nullptr)
+	if (ptr == nullptr)
 		cout << "\n QUEUE IS EMPTY";
 	else
 	{
-		// cout << "\n";
-		while(ptr!=q -> rear)
+		while(ptr != q -> rear)
 		{
 			cout << ptr -> data << "\n";
 			ptr = ptr -> next;
@@ -68,7 +54,6 @@ queue* Queue::delete_element()
 	node* ptr;
 	ptr = q -> front;
 
-	// your code
     if (ptr == nullptr) {
         cout << "Underflow" << endl;
     } else {
@@ -81,13 +66,13 @@ queue* Queue::delete_element()
 
 int Queue::peek()
 {
-	if(q->front==nullptr)
+	if (q -> front == nullptr)
 	{
 		cout << "\n QUEUE IS EMPTY";
 		return -1;
 	}
 	else
-		return q->front->data;
+		return q -> front -> data;
 }
 
 int Queue::get_size()
