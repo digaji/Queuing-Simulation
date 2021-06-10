@@ -16,15 +16,10 @@ int main() {
     Queue bank;
     srand (time(0));    // Randomize rand() output
 
-    std::ofstream myfile;
-    myfile.open ("single_queue.csv");
-    myfile << "service time;processed customers\n";
-
     const int NUM_CASHIER = 3;
     int processed_customer = 0;
     int c_time = 0;
-    int customer = 8;
-    int range, start_time, sim_time, arrive_time;
+    int range, start_time, sim_time, arrival_time;
 
     cout << "Start of service time (e.g. 50): ";
     cin >> start_time;
@@ -32,11 +27,16 @@ int main() {
     cout << "Range service time (e.g. 30): ";
     cin >> range;
 
-    cout << "Arrival time (must be between the range of service time): ";
-    cin >> arrive_time;
+    cout << "Arrival time: ";
+    cin >> arrival_time;
 
     cout << "Simulation time (seconds): ";
     cin >> sim_time;
+
+    std::ofstream myfile;
+    myfile.open("single_queue.csv");
+    myfile << "Start Time;Range;Arrival Time;Simulation Time\n" << start_time << ";" << range << ";" << arrival_time << ";" << sim_time << "\n\n";
+    myfile << "Service Time;Processed Customers\n";
 
     // Start with 8 customers in the queue
     for (int i = 0; i < 8; i++) {
@@ -57,12 +57,12 @@ int main() {
     int elapsed_time = int(chrono::duration_cast<chrono::seconds> (end - start).count());
 
     while (elapsed_time < sim_time) {
-        
-        if (c_time % arrive_time == 0){
+
+        if (c_time % arrival_time == 0){
             // Keep adding customers to the queue
             bank.insert(rand() % range + start_time);
         }
-        
+
         for (int i = 0; i < NUM_CASHIER; i++) {
             if (cashierArray[i].active == false && bank.get_size() != 0) { // Dequeue if a teller is open
                 cashierArray[i].active = true;
@@ -79,7 +79,6 @@ int main() {
             if (cashierArray[i].active == true && cashierArray[i].time_At == 0) {
                 cashierArray[i].active = false; // Set teller to open if time limit is reached
                 processed_customer++;
-                customer--;
             }
         }
 
@@ -91,10 +90,9 @@ int main() {
         if (elapsed_time != previous_time) {
             myfile << elapsed_time << ";" << processed_customer << "\n";
             cout << elapsed_time << " ";
-            // cout << "Customers: " << customer << " " << processed_customer << endl;
-        
-        c_time++;
         }
+
+        c_time++;
     }
 
     myfile.close();

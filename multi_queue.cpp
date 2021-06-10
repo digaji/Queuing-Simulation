@@ -18,10 +18,6 @@ int main() {
     Queue bank3;
     srand (time(0));    // Randomize rand() output
 
-    std::ofstream myfile;
-    myfile.open ("multi_queue.csv");
-    myfile << "service time;processed customers\n";
-
     const int NUM_CASHIER = 3;
     int processed_customer = 0;
     int c_time = 0;
@@ -33,11 +29,16 @@ int main() {
     cout << "Range service time (e.g. 30): ";
     cin >> range;
 
-    cout << "Arrival time (must be between the range of service time): ";
+    cout << "Arrival time: ";
     cin >> arrival_time;
 
     cout << "Simulation time (seconds): ";
     cin >> sim_time;
+
+    std::ofstream myfile;
+    myfile.open ("multi_queue.csv");
+    myfile << "Start Time;Range;Arrival Time;Simulation Time\n" << start_time << ";" << range << ";" << arrival_time << ";" << sim_time << "\n\n";
+    myfile << "Service Time;Processed Customers\n";
 
     // Start with 8 customers in the queue
     for (int i = 0; i < 8; i++) {
@@ -67,7 +68,6 @@ int main() {
             bank2.insert(rand() % range + start_time);
             bank3.insert(rand() % range + start_time);
         }
-        
 
         if (cashierArray[0].active == false && bank1.get_size() != 0) { // Dequeue if teller1 is open
             cashierArray[0].active = true;
