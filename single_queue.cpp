@@ -22,14 +22,18 @@ int main() {
 
     const int NUM_CASHIER = 3;
     int processed_customer = 0;
+    int c_time = 0;
     int customer = 8;
-    int range, start_time, sim_time;
+    int range, start_time, sim_time, arrive_time;
 
     cout << "Start of service time (e.g. 50): ";
     cin >> start_time;
 
     cout << "Range service time (e.g. 30): ";
     cin >> range;
+
+    cout << "Arrival time (must be between the range of service time): ";
+    cin >> arrive_time;
 
     cout << "Simulation time (seconds): ";
     cin >> sim_time;
@@ -53,9 +57,12 @@ int main() {
     int elapsed_time = int(chrono::duration_cast<chrono::seconds> (end - start).count());
 
     while (elapsed_time < sim_time) {
-        // Keep adding customers to the queue
-        bank.insert(rand() % range + start_time);
-
+        
+        if (c_time % arrive_time == 0){
+            // Keep adding customers to the queue
+            bank.insert(rand() % range + start_time);
+        }
+        
         for (int i = 0; i < NUM_CASHIER; i++) {
             if (cashierArray[i].active == false && bank.get_size() != 0) { // Dequeue if a teller is open
                 cashierArray[i].active = true;
@@ -85,6 +92,8 @@ int main() {
             myfile << elapsed_time << ";" << processed_customer << "\n";
             cout << elapsed_time << " ";
             // cout << "Customers: " << customer << " " << processed_customer << endl;
+        
+        c_time++;
         }
     }
 
