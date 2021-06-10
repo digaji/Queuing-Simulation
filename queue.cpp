@@ -79,3 +79,9 @@ int Queue::get_size()
 {
 	return size;
 }
+
+void Queue::free()
+{
+    delete q;
+    q = NULL;
+}

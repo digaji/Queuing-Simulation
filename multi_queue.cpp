@@ -97,10 +97,18 @@ int main() {
 
         if (elapsed_time != previous_time) {
             myfile << elapsed_time << ";" << processed_customer << "\n";
-            cout << elapsed_time << endl;
+            cout << elapsed_time << " ";
         }
     }
 
     myfile.close();
-    cout << "Total processed customers:\t" << processed_customer;
+    cout << "\nTotal processed customers:\t" << processed_customer;
+
+
+    // Prevent memory leaks
+    delete cashierArray;
+    cashierArray = NULL;
+    bank1.free();
+    bank2.free();
+    bank3.free();
 }

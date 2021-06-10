@@ -27,6 +27,7 @@ public:
 	int peek();
 	int get_size();
 	void move_next();
+    void free();
 
 private:
 	int size;

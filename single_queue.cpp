@@ -22,6 +22,7 @@ int main() {
 
     const int NUM_CASHIER = 3;
     int processed_customer = 0;
+    int customer = 8;
     int range, start_time, sim_time;
 
     cout << "Start of service time (e.g. 50): ";
@@ -71,6 +72,7 @@ int main() {
             if (cashierArray[i].active == true && cashierArray[i].time_At == 0) {
                 cashierArray[i].active = false; // Set teller to open if time limit is reached
                 processed_customer++;
+                customer--;
             }
         }
 
@@ -81,10 +83,16 @@ int main() {
 
         if (elapsed_time != previous_time) {
             myfile << elapsed_time << ";" << processed_customer << "\n";
-            cout << elapsed_time << endl;
+            cout << elapsed_time << " ";
+            // cout << "Customers: " << customer << " " << processed_customer << endl;
         }
     }
 
     myfile.close();
-    cout << "Total processed customers:\t" << processed_customer;
+    cout << "\nTotal processed customers:\t" << processed_customer;
+
+    // Prevent memory leaks
+    delete cashierArray;
+    cashierArray = NULL;
+    bank.free();
 }
