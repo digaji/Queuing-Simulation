@@ -111,8 +111,9 @@ int main() {
         c_time++;
     }
 
+    myfile.flush();
     myfile.close();
-    cout << "\nTotal processed customers:\t" << processed_customer;
+    cout << "\nTotal processed customers: " << processed_customer;
 
 
     // Prevent memory leaks
